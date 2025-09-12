@@ -21,10 +21,10 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: 22
           script: |
-            cd ~/my-app
+            cd ~/Sample-LLM-DB-Backend
             # Pull latest code using the deploy key
             GIT_SSH_COMMAND='ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no' git pull origin main
             # Install dependencies
             npm install
             # Start or restart the app with pm2
-            pm2 restart all || pm2 start index.js --name my-app
+            pm2 restart all || pm2 start server.js --name Sample-LLM-DB-Backend
