@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors"); 
 const swaggerUi = require("swagger-ui-express");
 
 const connectDB = require("./config/db");
@@ -7,6 +8,22 @@ const swaggerSpec = require("./swagger/swagger");
 
 const app = express();
 const port = 3000;
+
+app.use(cors({
+  origin: "*"
+}));
+
+/* Safer but worse for development
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || origin.startsWith("chrome-extension://")) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+}));
+*/
 
 async function start() {
   try {
