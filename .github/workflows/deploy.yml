@@ -1,0 +1,30 @@
+name: Deploy Node App to EC2
+
+on:
+  push:
+    branches:
+      - main  # deploy on main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Connect & deploy to EC2
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          port: 22
+          script: |
+            cd ~/my-app
+            # Pull latest code using the deploy key
+            GIT_SSH_COMMAND='ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no' git pull origin main
+            # Install dependencies
+            npm install
+            # Start or restart the app with pm2
+            pm2 restart all || pm2 start index.js --name my-app
