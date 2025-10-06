@@ -8,8 +8,9 @@ const swaggerOptions = {
       version: "1.0.0",
       description: "API to query LLM signatures",
     },
+    security: [], // optional global security
   },
-  apis: ["./routes/*.js"], // looks at JSDoc in routes
+  apis: ["./routes/*.js"],
 };
 
 module.exports = swaggerJsdoc(swaggerOptions);
