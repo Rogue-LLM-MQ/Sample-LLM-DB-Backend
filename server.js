@@ -30,10 +30,18 @@ async function start() {
     // Swagger UI
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-    app.listen(port, () => {
-      console.log(`✅ Server running at http://localhost:${port}`);
-      console.log(`📘 Swagger docs: http://localhost:${port}/api-docs`);
-    });
+    if (process.env.ENV === "prod") {
+      app.listen(port, '0.0.0.0', () => {
+        console.log(`✅ Server running in PROD on port ${port}`);
+        console.log(`🌐 Access Swagger docs at http://<EC2_PUBLIC_IP>:${port}/api-docs`);
+      });
+    } else {
+      app.listen(port, () => {
+        console.log(`✅ Server running at http://localhost:${port}`);
+        console.log(`📘 Swagger docs: http://localhost:${port}/api-docs`);
+      });
+    }
+
   } catch (err) {
     console.error("❌ Failed to start server:", err);
   }
