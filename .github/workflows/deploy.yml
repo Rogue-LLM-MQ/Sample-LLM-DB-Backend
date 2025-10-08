@@ -1,3 +1,4 @@
+debug: true
 name: Deploy Node App to EC2
 
 on:
