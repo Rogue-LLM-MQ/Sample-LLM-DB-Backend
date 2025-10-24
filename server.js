@@ -22,10 +22,13 @@ async function start() {
     // Routes
     const llmsRoutes = require("./routes/LLMs")(db);
     const authRoutes = require("./routes/auth")(db);
+    const osRoutes = require('./routes/opensearchRoutes');
 
     // Mount routes
     app.use("/auth", authRoutes);
     app.use("/llms", llmsRoutes);
+    app.use('/opensearch', osRoutes);
+
 
     // Swagger UI
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
