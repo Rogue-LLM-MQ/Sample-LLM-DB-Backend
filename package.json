@@ -18,6 +18,7 @@
     "@aws-sdk/protocol-http": "^3.370.0",
     "@aws-sdk/signature-v4": "^3.370.0",
     "@opensearch-project/opensearch": "^3.5.1",
+    "aws-opensearch-connector": "^1.2.0",
     "aws-sdk": "^2.1692.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",

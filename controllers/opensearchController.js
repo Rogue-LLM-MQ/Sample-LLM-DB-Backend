@@ -1,4 +1,4 @@
-//controllers/opensearch.js
+//controllers/opensearchController.js
 const client = require('../config/opensearch');
 
 // Example: index name for your LLM logs
